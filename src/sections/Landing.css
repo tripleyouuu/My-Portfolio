@@ -32,7 +32,6 @@
   color: #ddd;
 }
 
-
 .social-icons {
   display: flex;
   gap: 1.4rem;
@@ -62,7 +61,7 @@
 .landing .image-wrapper {
   position: relative;
   border-radius: 12px;
-  padding: 0.4rem; /* Adds spacing so glow isn't clipped */
+  padding: 0.4rem;
   background: transparent;
 }
 
@@ -102,7 +101,6 @@
   line-height: 1.8;
 }
 
-/* Highlight word styling */
 .highlight {
   color: #ff9dff;
   font-weight: 700;
@@ -112,7 +110,6 @@
   transition: all 0.3s ease;
 }
 
-/* Scroll animations */
 [data-animate] {
   opacity: 0;
   transform: translateY(30px);

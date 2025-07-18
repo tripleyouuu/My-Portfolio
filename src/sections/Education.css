@@ -48,12 +48,11 @@
   display: block;
 }
 
-/* Purple overlay */
 .education .image-wrapper::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: hsl(270, 70%, 29%); /* soft purple overlay */
+  background: hsl(270, 70%, 29%);
   opacity: 0.25;
   z-index: 1;
 }
