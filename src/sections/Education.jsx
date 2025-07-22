@@ -64,13 +64,16 @@ export default function Education() {
     if (!container) return;
 
     const scrollSpeed = 1.2;
-    const scrollOnce = () => {
-      if (!visible) return;
 
-      container.scrollLeft += scrollSpeed;
+    const scrollOnce = () => {
+      if (!visible || !container) return;
 
       const maxScrollLeft = container.scrollWidth - container.clientWidth;
-      if (container.scrollLeft >= maxScrollLeft - 1) {
+      const nextScroll = container.scrollLeft + scrollSpeed;
+
+      container.scrollTo({ left: nextScroll, behavior: 'auto' });
+
+      if (nextScroll >= maxScrollLeft - 1) {
         cancelAnimationFrame(animationRef.current);
         setTimeout(() => {
           container.scrollLeft = 0;
@@ -126,7 +129,8 @@ export default function Education() {
         <motion.div
           className="edu-block"
           initial="hidden"
-          animate={visible ? 'visible' : 'hidden'}
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
           custom={0}
           variants={fadeVariant}
         >
@@ -147,7 +151,8 @@ export default function Education() {
         <motion.div
           className="edu-block"
           initial="hidden"
-          animate={visible ? 'visible' : 'hidden'}
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
           custom={1}
           variants={fadeVariant}
         >
