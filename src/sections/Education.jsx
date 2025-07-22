@@ -38,52 +38,57 @@ const images = [
 
 export default function Education() {
   const scrollRef = useRef(null);
-  const [paused, setPaused] = useState(false);
-  const pauseTimeoutRef = useRef(null);
   const animationRef = useRef(null);
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
 
-  const scroll = (direction) => {
+  const scrollByImage = (direction) => {
     const container = scrollRef.current;
-    const amount = container.clientWidth * 0.8;
+    const image = container.querySelector('.image-wrapper');
+    const amount = image ? image.clientWidth : 300;
     if (direction === 'left') container.scrollLeft -= amount;
     else container.scrollLeft += amount;
-
-    setPaused(true);
-    clearTimeout(pauseTimeoutRef.current);
-    pauseTimeoutRef.current = setTimeout(() => setPaused(false), 5000);
   };
-
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-    const scrollSpeed = 1.7;
-    const imageSetLength = container.scrollWidth / 2;
-    container.scrollLeft = imageSetLength;
-
-    const autoScroll = () => {
-      if (!paused) {
-        container.scrollLeft += scrollSpeed;
-        if (container.scrollLeft >= imageSetLength * 2) {
-          container.scrollLeft = imageSetLength;
-        }
-      }
-      animationRef.current = requestAnimationFrame(autoScroll);
-    };
-
-    animationRef.current = requestAnimationFrame(autoScroll);
-    return () => cancelAnimationFrame(animationRef.current);
-  }, [paused]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.4 }
+      { threshold: 0.5 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const scrollSpeed = 1.2;
+    const scrollOnce = () => {
+      if (!visible) return;
+
+      container.scrollLeft += scrollSpeed;
+
+      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+      if (container.scrollLeft >= maxScrollLeft - 1) {
+        cancelAnimationFrame(animationRef.current);
+        setTimeout(() => {
+          container.scrollLeft = 0;
+          animationRef.current = requestAnimationFrame(scrollOnce);
+        }, 1000);
+      } else {
+        animationRef.current = requestAnimationFrame(scrollOnce);
+      }
+    };
+
+    if (visible) {
+      animationRef.current = requestAnimationFrame(scrollOnce);
+    } else {
+      cancelAnimationFrame(animationRef.current);
+    }
+
+    return () => cancelAnimationFrame(animationRef.current);
+  }, [visible]);
 
   const fadeVariant = {
     hidden: { opacity: 0, y: 30 },
@@ -101,18 +106,18 @@ export default function Education() {
   return (
     <div className="section education" ref={sectionRef}>
       <div className="image-strip-container">
-        <button className="scroll-btn left" onClick={() => scroll('left')}>
+        <button className="scroll-btn left" onClick={() => scrollByImage('left')}>
           <ChevronLeft />
         </button>
         <div className="image-strip" ref={scrollRef}>
-          {[...images, ...images].map((img, idx) => (
+          {images.map((img, idx) => (
             <div className="image-wrapper" key={idx}>
               <img src={img.src} alt={`edu-${idx}`} />
               <div className="caption">{img.caption}</div>
             </div>
           ))}
         </div>
-        <button className="scroll-btn right" onClick={() => scroll('right')}>
+        <button className="scroll-btn right" onClick={() => scrollByImage('right')}>
           <ChevronRight />
         </button>
       </div>

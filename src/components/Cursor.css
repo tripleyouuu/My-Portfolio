@@ -10,4 +10,9 @@
     filter: blur(10px);
     mix-blend-mode: lighten;
   }
-  
+
+  @media (max-width: 768px) {
+    .cursor {
+      display: none;
+    }
+  }

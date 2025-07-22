@@ -10,6 +10,12 @@ html {
 
 body {
   font-family: sans-serif;
-  background-color: #fdfdfd;
+  background-color: hsl(271, 100%, 14%);
   color: #222;
+  padding-top: env(safe-area-inset-top);
+}
+
+main {
+  overscroll-behavior: none;
+  position: relative;
 }
