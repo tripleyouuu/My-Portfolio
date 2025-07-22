@@ -10,17 +10,19 @@ import Interests from './sections/Interests';
 
 export default function App() {
   useEffect(() => {
-    const handleKeyScroll = (e) => {
-      const scrollAmount = 80;
-      if (e.key === 'ArrowDown') {
-        window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
-      } else if (e.key === 'ArrowUp') {
-        window.scrollBy({ top: -scrollAmount, behavior: 'smooth' });
-      }
-    };
+    if (window.innerWidth >= 768) {
+      const handleKeyScroll = (e) => {
+        const scrollAmount = 80;
+        if (e.key === 'ArrowDown') {
+          window.scrollBy({ top: scrollAmount, behavior: 'smooth' });
+        } else if (e.key === 'ArrowUp') {
+          window.scrollBy({ top: -scrollAmount, behavior: 'smooth' });
+        }
+      };
 
-    window.addEventListener('keydown', handleKeyScroll);
-    return () => window.removeEventListener('keydown', handleKeyScroll);
+      window.addEventListener('keydown', handleKeyScroll);
+      return () => window.removeEventListener('keydown', handleKeyScroll);
+    }
   }, []);
 
   return (
