@@ -10,15 +10,18 @@ export default function Navbar() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-            break;
-          }
+      (entries) => {
+        const visible = entries
+          .filter(entry => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible.length > 0) {
+          setActive(visible[0].target.id);
         }
       },
-      { threshold: 0.6 }
+      {
+        rootMargin: '-30% 0px -50% 0px',
+        threshold: [0, 0.25, 0.5, 0.75, 1]
+      }
     );
 
     sections.forEach(id => {
@@ -84,7 +87,7 @@ export default function Navbar() {
         ))}
       </div>
 
-      {isModalOpen && (
+      {isModalOpen ? (
         <>
           <div className="modal-backdrop" onClick={() => setIsModalOpen(false)} />
           <div className="modal-nav">
@@ -99,7 +102,7 @@ export default function Navbar() {
             ))}
           </div>
         </>
-      )}
+      ) : null}
     </>
   );
 }

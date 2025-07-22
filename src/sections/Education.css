@@ -136,3 +136,15 @@
   font-size: 0.95rem;
   line-height: 1.8;
 }
+
+@media (max-width: 768px) {
+  .edu-columns {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .edu-block h3 {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
+}
