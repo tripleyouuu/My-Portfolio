@@ -110,6 +110,7 @@ export default function Interests() {
 
   return (
     <div className="section interests" ref={ref}>
+      <h2 className="mobile-interests-heading">My Interests</h2>
       <p className="interests-intro">
         When all is said and done, what I really am is an eager <span className="highlight">learner</span>. And there's a lot to learn outside of academics, at the risk of becoming a "jack of all trades". When I'm not coding, you can find me filling my hours with any of these:
       </p>

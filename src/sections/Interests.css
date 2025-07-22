@@ -72,3 +72,18 @@
     line-height: 1.5;
   }
   
+  .mobile-interests-heading {
+    display: none;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffcaff;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .mobile-interests-heading {
+      display: block;
+    }
+  }
+  

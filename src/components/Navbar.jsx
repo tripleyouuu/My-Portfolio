@@ -5,6 +5,8 @@ const sections = ['landing', 'tech-skills', 'education', 'projects', 'interests'
 
 export default function Navbar() {
   const [active, setActive] = useState('landing');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [clicked, setClicked] = useState(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -47,22 +49,57 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setClicked(id);
+    setTimeout(() => setClicked(null), 300);
+    setIsModalOpen(false);
+  };
+
   return (
-    <nav className="navbar">
-      {sections.map(id => {
-        const text = id.replace('-', ' ');
-        const firstChar = text[0];
-        const rest = text.slice(1);
-        return (
-          <a
-            key={id}
-            href={`#${id}`}
-            className={active === id ? 'active' : ''}
-          >
-            <span className="underline">{firstChar}</span>{rest}
-          </a>
-        );
-      })}
-    </nav>
+    <>
+      <nav className="navbar desktop-nav">
+        {sections.map(id => {
+          const text = id.replace('-', ' ');
+          const firstChar = text[0];
+          const rest = text.slice(1);
+          return (
+            <a
+              key={id}
+              href={`#${id}`}
+              className={active === id ? 'active' : ''}
+            >
+              <span className="underline">{firstChar}</span>{rest}
+            </a>
+          );
+        })}
+      </nav>
+
+      <div className="mobile-bar" onClick={() => setIsModalOpen(true)}>
+        {sections.map((id, i) => (
+          <span
+            key={i}
+            className={`dot ${active === id ? 'dot-active' : ''}`}
+          />
+        ))}
+      </div>
+
+      {isModalOpen && (
+        <>
+          <div className="modal-backdrop" onClick={() => setIsModalOpen(false)} />
+          <div className="modal-nav">
+            {sections.map(id => (
+              <button
+                key={id}
+                onClick={() => scrollTo(id)}
+                className={`modal-link ${clicked === id ? 'clicked' : ''} ${active === id ? 'modal-active' : ''}`}
+              >
+                {id.replace('-', ' ')}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </>
   );
 }

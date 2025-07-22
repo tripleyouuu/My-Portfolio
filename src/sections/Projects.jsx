@@ -113,7 +113,8 @@ export default function Projects() {
   return (
     <div className="section projects" ref={ref}>
       <div className="projects-intro">
-        <p>Though I've only had any effective education in CS for a short time, I've thoroughly enjoyed building and working on projects from time to time. Be it an assignment focusing on execution of a small idea, or working with teams to come up with something impactful for the future, it's a thrill all the same to take something from a few abstract thoughts to a tangible piece of work.</p>
+      <h2 className="mobile-projects-heading">My Projects</h2>
+      <p>Though I've only had any effective education in CS for a short time, I've thoroughly enjoyed building and working on projects from time to time. Be it an assignment focusing on execution of a small idea, or working with teams to come up with something impactful for the future, it's a thrill all the same to take something from a few abstract thoughts to a tangible piece of work.</p>
       </div>
 
       <div className="projects-grid">
