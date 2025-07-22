@@ -51,10 +51,17 @@ export default function Education() {
   };
 
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+
+    const observerOptions = isMobile
+      ? { threshold: 0.1, rootMargin: '0px 0px -20% 0px' }
+      : { threshold: 0.5, rootMargin: '0px' };
+
     const observer = new IntersectionObserver(
       ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.5 }
+      observerOptions
     );
+
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
@@ -63,17 +70,15 @@ export default function Education() {
     const container = scrollRef.current;
     if (!container) return;
 
-    const scrollSpeed = 1.2;
+    const scrollSpeed = 1.5;
 
     const scrollOnce = () => {
-      if (!visible || !container) return;
+      if (!visible) return;
+
+      container.scrollLeft += scrollSpeed;
 
       const maxScrollLeft = container.scrollWidth - container.clientWidth;
-      const nextScroll = container.scrollLeft + scrollSpeed;
-
-      container.scrollTo({ left: nextScroll, behavior: 'auto' });
-
-      if (nextScroll >= maxScrollLeft - 1) {
+      if (container.scrollLeft >= maxScrollLeft - 1) {
         cancelAnimationFrame(animationRef.current);
         setTimeout(() => {
           container.scrollLeft = 0;
@@ -129,8 +134,7 @@ export default function Education() {
         <motion.div
           className="edu-block"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          animate={visible ? 'visible' : 'hidden'}
           custom={0}
           variants={fadeVariant}
         >
@@ -151,8 +155,7 @@ export default function Education() {
         <motion.div
           className="edu-block"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          animate={visible ? 'visible' : 'hidden'}
           custom={1}
           variants={fadeVariant}
         >

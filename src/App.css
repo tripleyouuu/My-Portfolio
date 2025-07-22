@@ -10,14 +10,15 @@ html, body {
 
 main {
   height: 100vh;
-  overflow-y: scroll;
   padding-top: 60px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
-/* Scroll snapping only for desktop */
 @media (min-width: 768px) {
   main {
     scroll-snap-type: y mandatory;
+    overflow-y: scroll;
   }
 
   .section {
