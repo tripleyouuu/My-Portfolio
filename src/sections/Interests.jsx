@@ -17,7 +17,9 @@ export default function Interests() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
       { threshold: 0.3 }
     );
     if (ref.current) observer.observe(ref.current);

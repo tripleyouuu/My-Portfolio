@@ -41,6 +41,7 @@ export default function Education() {
   const animationRef = useRef(null);
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
+  const hasBeenVisible = useRef(false);
 
   const scrollByImage = (direction) => {
     const container = scrollRef.current;
@@ -51,15 +52,14 @@ export default function Education() {
   };
 
   useEffect(() => {
-    const isMobile = window.innerWidth <= 768;
-
-    const observerOptions = isMobile
-      ? { threshold: 0.1, rootMargin: '0px 0px -20% 0px' }
-      : { threshold: 0.5, rootMargin: '0px' };
-
     const observer = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      observerOptions
+      ([entry]) => {
+        if (entry.isIntersecting || entry.intersectionRatio > 0.2) {
+          hasBeenVisible.current = true;
+          setVisible(true);
+        }
+      },
+      { threshold: Array.from({ length: 101 }, (_, i) => i / 100) }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -73,7 +73,7 @@ export default function Education() {
     const scrollSpeed = 1.5;
 
     const scrollOnce = () => {
-      if (!visible) return;
+      if (!hasBeenVisible.current) return;
 
       container.scrollLeft += scrollSpeed;
 
@@ -89,11 +89,7 @@ export default function Education() {
       }
     };
 
-    if (visible) {
-      animationRef.current = requestAnimationFrame(scrollOnce);
-    } else {
-      cancelAnimationFrame(animationRef.current);
-    }
+    animationRef.current = requestAnimationFrame(scrollOnce);
 
     return () => cancelAnimationFrame(animationRef.current);
   }, [visible]);
@@ -134,7 +130,7 @@ export default function Education() {
         <motion.div
           className="edu-block"
           initial="hidden"
-          animate={visible ? 'visible' : 'hidden'}
+          animate={hasBeenVisible.current ? 'visible' : 'hidden'}
           custom={0}
           variants={fadeVariant}
         >
@@ -155,7 +151,7 @@ export default function Education() {
         <motion.div
           className="edu-block"
           initial="hidden"
-          animate={visible ? 'visible' : 'hidden'}
+          animate={hasBeenVisible.current ? 'visible' : 'hidden'}
           custom={1}
           variants={fadeVariant}
         >

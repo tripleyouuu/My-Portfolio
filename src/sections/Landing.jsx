@@ -8,8 +8,7 @@ export default function Landing() {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-        } else {
-          entry.target.classList.remove('visible');
+          observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1 });
@@ -54,12 +53,12 @@ export default function Landing() {
           <p data-animate data-delay="100">
             I’m an aspiring tech savant, passionate about coding, and trying to make it big in this evolving industry. I'm about to begin Year 2 of my bachelor's in Computer Science.
           </p>
-          <br/>
+          <br />
           <p data-animate data-delay="200"><strong>But here’s a little more:</strong></p>
           <p data-animate data-delay="300">
             At my core, I am a <span className="highlight">learner</span>— constantly seeking knowledge and refining my skills, technical and otherwise— with the hopes of one day building things I’m so proud of, I can’t stop talking about them.
           </p>
-          <br/>
+          <br />
           <p data-animate data-delay="400">
             On my best days, I’m a confident, introverted logician. On the others, my head’s a little in the clouds. Either way, I like to believe I end each day improved by the tiniest bit. <span className="highlight">Keep scrolling</span>, to get to know me better!
           </p>
