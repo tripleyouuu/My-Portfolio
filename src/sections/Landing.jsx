@@ -1,30 +1,18 @@
 import './Landing.css';
 import profile from '../assets/image.png';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Landing() {
-  const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          } else {
-            entry.target.classList.remove('visible');
-          }
-        });
-      },
-      {
-        threshold: isMobile ? 0.1 : 0.5,
-        rootMargin: isMobile ? '0px 0px -20% 0px' : '0px',
-      }
-    );
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.1 });
 
     const elements = document.querySelectorAll('[data-animate]');
     elements.forEach(el => {
@@ -34,7 +22,7 @@ export default function Landing() {
     });
 
     return () => observer.disconnect();
-  }, [isMobile]);
+  }, []);
 
   return (
     <div className="section landing">
