@@ -51,12 +51,12 @@ export default function Landing() {
         <div className="text">
           <p data-animate><strong>The description you came looking for:</strong></p>
           <p data-animate data-delay="100">
-            I’m an aspiring tech savant, passionate about coding, and trying to make it big in this evolving industry. I'm about to begin Year 2 of my bachelor's in Computer Science.
+            I’m an aspiring tech savant, passionate about coding, and trying to make it big in this evolving industry. I'm about to begin year 2 of my bachelor's in Computer Science.
           </p>
           <br />
           <p data-animate data-delay="200"><strong>But here’s a little more:</strong></p>
           <p data-animate data-delay="300">
-            At my core, I am a <span className="highlight">learner</span>— constantly seeking knowledge and refining my skills, technical and otherwise— with the hopes of one day building things I’m so proud of, I can’t stop talking about them.
+            At my core, I am a <span className="highlight">learner</span>— constantly seeking knowledge and refining my skills, technical and otherwise, with the hopes of one day building things I’m so proud of, I can’t stop talking about them.
           </p>
           <br />
           <p data-animate data-delay="400">

@@ -136,18 +136,17 @@ export default function Education() {
         >
           <h3>Academics</h3>
           <p>
-            I’m a student at <span className="highlight">Scaler School of Technology</span>, graduating in 2028. Its industry-focused curriculum and CS focus have been a breath of fresh air.
+            I’m a student at <span className="highlight">Scaler School of Technology</span>, graduating in 2028. Its industry-focused curriculum and CS-focus have been a breath of fresh air.
           </p>
           <br />
           <p>
-            In parallel, I’m pursuing <span className="highlight">a B.Sc. from BITS Pilani</span> (Class of 2027) and will complete an <span className="highlight">M.S. from WOOLF University</span>, UK in 2028, both in Computer Science. An unconventional setup I'm happy to brag about!
+            In parallel, I’m pursuing <span className="highlight">a B.Sc. from BITS Pilani</span> (Class of 2027) and will complete an <span className="highlight">MS from Woolf University</span>, UK in 2028, both in Computer Science. An unconventional setup I'm happy to brag about!
           </p>
           <br />
           <p>
-            My first-year <span className="highlight">coursework</span> covered Web Development, DSA, Operating Systems, Data Analytics, and foundational math for Machine Learning. I also attended <span className="highlight">technical workshops</span> (e.g., game development, visionOS) and served as a <span className="highlight">Teaching Assistant</span> for English III and Public Speaking.
+            In my <span className="highlight">first year</span>, I've covered Web Development, DSA, Operating Systems, Data Analytics, and foundational math for Machine Learning. I also attended <span className="highlight">technical workshops</span> (e.g., game development, visionOS) and served as a <span className="highlight">Teaching Assistant</span> for English III and Public Speaking.
           </p>
         </motion.div>
-
         <motion.div
           className="edu-block"
           initial="hidden"
@@ -157,7 +156,7 @@ export default function Education() {
         >
           <h3>Extra-curriculars</h3>
           <p>
-            In my first year, I've taken every opportunity I could make time for: chess, singing, rangolis, directing dramas and musicals, debates, parties, hackathons— you name it. Gotta <span className="highlight">develop myself</span>, not just software!
+            In my first year, I've taken every opportunity I could make time for: chess, singing, rangolis, directing dramas and musicals, debates, parties, hackathons... you name it. Gotta <span className="highlight">develop myself</span>, not just software!
           </p>
           <br />
           <p>
